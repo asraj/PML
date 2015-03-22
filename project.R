@@ -4,7 +4,7 @@ library(randomForest)
 
 pml <- read.csv("pml-training.csv", na.strings=c("NA", "#DIV/0!", ""))
 
-submission <-read.csv("pml-training.csv", na.strings=c("NA", "#DIV/0!", ""))
+submission <-read.csv("pml-testing.csv", na.strings=c("NA", "#DIV/0!", ""))
 
 ## Remove first 7 columns
 pml<-pml[,-c(1:7)]
@@ -62,8 +62,8 @@ confusionMatrix(predict(modelFit,test), test$classe)
 #Balanced Accuracy      0.9850   0.9510   0.9609   0.9714   0.9815
 
 ## Filter cols for Submission
-trainCols <- colnames(training[, -58]) 
-submission <- submission[trainCols]
+trainCols <- colnames(training[, -53]) 
+submission <- submission[,trainCols]
 
 ## Coerce the submission data to  the same type as training.
 for (i in 1:length(submission) ) {
